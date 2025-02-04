@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  nginx:
+    build:
+      context: ./nginx/
+    container_name: nginx_container
+    networks:
+      - box_morhping_network
+    ports:
+      - "80:80"
+    restart: always
+    depends_on:
+      - box_morphing
+
+  box_morphing:
+    build:
+      context: .
+    container_name: box_morphing_container
+    networks:
+      - box_morhping_network
+    ports:
+      - "3000:3000"
+    restart: always
+
+networks:
+  box_morhping_network:
